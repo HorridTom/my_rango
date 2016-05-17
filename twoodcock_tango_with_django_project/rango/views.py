@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+
+# My first view - called "index"
+# It takes a HttpResponse "request"
+# and returns another HttpResponse
+def index(request):
+    return HttpResponse("Rango says hey there partner!")
