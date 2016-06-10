@@ -12,6 +12,11 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.views = max(self.views, 0)
+        self.likes = max(self.likes, 0)
+        super(Category, self).save(*args, **kwargs)
+
 
 class Page(models.Model):
     category = models.ForeignKey(Category)
