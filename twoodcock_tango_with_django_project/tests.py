@@ -9,8 +9,8 @@ from django.contrib.staticfiles import finders
 class GeneralTests(TestCase):
     def test_serving_static_files(self):
         # If using static media properly result is not NONE once it finds
-        # rango.jpg
-        result = finders.find('images/rango.jpg')
+        # rango_1.jpg
+        result = finders.find('images/rango_1.jpg')
         self.assertIsNotNone(result)
 
 
@@ -29,10 +29,10 @@ class IndexPageTests(TestCase):
         self.assertTemplateUsed(response, 'rango/index.html')
 
     def test_rango_picture_displayed(self):
-        # Check if is there an image called 'rango.jpg' on the index page
+        # Check if is there an image called 'rango_1.jpg' on the index page
         # Chapter 4
         response = self.client.get(reverse('index'))
-        self.assertIn(b'img src="/static/images/rango.jpg', response.content)
+        self.assertIn(b'img src="/static/images/rango_1.jpg', response.content)
 
     def test_index_has_title(self):
         # Check to make sure that the title tag has been used
