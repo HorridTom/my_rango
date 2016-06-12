@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from rango.models import Category
 
 
+# TODO: Chapter 11 Exercises
 # Test helpers
 def add_cat(name, views, likes):
     c = Category.objects.get_or_create(name=name)[0]
