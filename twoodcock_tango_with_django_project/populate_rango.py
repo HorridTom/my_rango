@@ -1,3 +1,9 @@
+# This module populates the database
+# TODO: Write a script to output the data in the database
+# so that any changes you make can be saved out into a file that can be
+# read in later (exercise at end of section 6.3).
+
+
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.set\
                         tings')
