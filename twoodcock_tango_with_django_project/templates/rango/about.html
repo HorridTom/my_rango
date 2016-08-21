@@ -8,7 +8,11 @@
 {% block body_block %}
     <h1>About Rango...</h1>
     <div>
-        Hey there partner! <br />
+        {% if user.is_authenticated %}
+                Howdy {{ user.username }}! You have visited Rango {{ visits }} times.
+            {% else %}
+                Hey there partner!
+            {% endif %} <br />
         This tutorial has been put together by <strong>{{ name }}</strong><br />
     </div>
     <div>
