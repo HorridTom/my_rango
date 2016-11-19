@@ -240,15 +240,15 @@ def add_page(request, category_name_slug):
 
 @login_required
 def restricted(request):
-    return HttpResponse("Since you are logged in, you can see this text!")
+    return render(request, 'rango/restricted.html')
 
 
-@login_required
-def user_logout(request):
-    # Since we know the user is logged in, we can now just log them out.
-    logout(request)
-    # Take the user back to the homepage.
-    return HttpResponseRedirect(reverse('index'))
+# @login_required
+# def user_logout(request):
+#     # Since we know the user is logged in, we can now just log them out.
+#     logout(request)
+#     # Take the user back to the homepage.
+#     return HttpResponseRedirect(reverse('index'))
 
 
 # Helper functions
