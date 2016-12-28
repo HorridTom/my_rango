@@ -96,3 +96,6 @@ ENV/
 
 # Rango stuff
 profile_images/
+
+# API keys
+*.key
