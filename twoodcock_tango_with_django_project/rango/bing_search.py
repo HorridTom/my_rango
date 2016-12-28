@@ -2,7 +2,6 @@ import json
 
 import urllib.parse
 import urllib.request
-import urllib.error
 import http.client
 
 
@@ -142,7 +141,8 @@ def run_query(search_terms):
     results = []
 
     try:
-        conn = http.client.HTTPSConnection('api.cognitive.microsoft.com')
+        conn = http.client.HTTPSConnection(  # @UndefinedVariable
+            'api.cognitive.microsoft.com')
         conn.request("GET", "/bing/v5.0/search?%s" % params, "{body}", headers)
         response = conn.getresponse()
 
