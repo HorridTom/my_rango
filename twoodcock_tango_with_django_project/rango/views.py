@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 # Import the necessary models and forms
 from rango.models import Category, Page
 from rango.forms import UserForm, UserProfileForm, CategoryForm, PageForm
+from rango.bing_search import run_query
 
 
 # The index view
@@ -283,3 +284,15 @@ def visitor_cookie_handler(request):
 
     # update/set the visits cookie
     request.session['visits'] = visits
+
+
+def search(request):
+    result_list = []
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            # Run our Bing function to get the resullts list!
+            result_list = run_query(query)
+
+    return render(request, 'rango/search.html', {'result_list': result_list})
