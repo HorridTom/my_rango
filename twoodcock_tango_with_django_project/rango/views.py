@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import HttpResponseRedirect, HttpResponse
 # from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
@@ -66,7 +66,7 @@ def show_category(request, category_name_slug):
         # Retrieve all of the associated pages.
         # Note that filter() will return a list of page objects or
         # an empty list.
-        pages = Page.objects.filter(category=category)
+        pages = Page.objects.filter(category=category).order_by('-views')
 
         # Adds our results list to the template context under name pages.
         context_dict['pages'] = pages
@@ -250,6 +250,33 @@ def restricted(request):
 #     logout(request)
 #     # Take the user back to the homepage.
 #     return HttpResponseRedirect(reverse('index'))
+
+
+# Track url view
+def track_url(request):
+    page_id = None
+    url = '/rango/'
+    # Check if the request is a GET request
+    if request.method == 'GET':
+        # Check that the request dictionary contains 'page_id',
+        # and store it in the page_id variable
+        if 'page_id' in request.GET:
+            page_id = request.GET['page_id']
+
+            # Try retrieving the page object from its page_id,
+            # increment the views field,
+            # then save the page object back to the database.
+            try:
+                page = Page.objects.get(id=page_id)
+                page.views = page.views + 1
+                page.save()
+                url = page.url
+            # If we cannot do that for some reason, do nothing.
+            # NOTE: should specify what sort of exception it's OK to ignore.
+            except:
+                pass
+
+    return redirect(url)
 
 
 # Helper functions
