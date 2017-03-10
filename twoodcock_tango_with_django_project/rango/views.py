@@ -76,6 +76,19 @@ def show_category(request, category_name_slug):
         # We'll use this in the template to verify that the category exists.
         context_dict['category'] = category
 
+        result_list = []
+        query = ""
+
+        if request.method == 'POST':
+            query = request.POST.get('query')
+            if query:
+                query = query.strip()
+                # Run our Bing function to get the results list!
+                result_list = run_query(query)
+                context_dict['query'] = query
+            context_dict['result_list'] = result_list
+            context_dict['query'] = query
+
     except Category.DoesNotExist:
         # We get here if we didn't find the specified category.
         # Don't do anything -
