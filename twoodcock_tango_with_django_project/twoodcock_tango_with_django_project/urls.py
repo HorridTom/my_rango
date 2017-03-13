@@ -26,7 +26,7 @@ from rango import views
 # if successful at logging in.
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-        return '/rango'
+        return url('register_profile')
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
