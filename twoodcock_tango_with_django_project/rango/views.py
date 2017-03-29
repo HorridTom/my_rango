@@ -1,15 +1,14 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
-from django.http.response import HttpResponseRedirect, HttpResponse
-# from django.contrib.auth import authenticate, login
-from django.core.urlresolvers import reverse
-from django.contrib.auth import logout
+# from django.http.response import HttpResponseRedirect, HttpResponse
+# from django.core.urlresolvers import reverse
+# from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 # Import the necessary models and forms
-from rango.models import Category, Page
-from rango.forms import UserForm, UserProfileForm, CategoryForm, PageForm
+from rango.models import Category, Page, User, UserProfile
+from rango.forms import UserProfileForm, CategoryForm, PageForm
 from rango.bing_search import run_query
-import contextlib
+# import contextlib
 
 
 # The index view
@@ -310,6 +309,39 @@ def track_url(request):
                 pass
 
     return redirect(url)
+
+
+@login_required
+def profile(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return redirect('index')
+
+    userprofile = UserProfile.objects.get_or_create(user=user)[0]
+    form = UserProfileForm(
+        {'website': userprofile.website, 'picture': userprofile.picture})
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES,
+                               instance=userprofile)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('profile', user.username)
+        else:
+            print(form.errors)
+
+    return render(request, 'rango/profile.html',
+                  {'userprofile': userprofile, 'selecteduser': user,
+                   'form': form})
+
+
+@login_required
+def list_profiles(request):
+    userprofile_list = UserProfile.objects.all()
+
+    return render(request, 'rango/list_profiles.html',
+                  {'userprofile_list': userprofile_list})
 
 
 # Helper functions
