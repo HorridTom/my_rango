@@ -175,14 +175,6 @@ def restricted(request):
     return render(request, 'rango/restricted.html')
 
 
-# @login_required
-# def user_logout(request):
-#     # Since we know the user is logged in, we can now just log them out.
-#     logout(request)
-#     # Take the user back to the homepage.
-#     return HttpResponseRedirect(reverse('index'))
-
-
 # Track url view
 def track_url(request):
     page_id = None

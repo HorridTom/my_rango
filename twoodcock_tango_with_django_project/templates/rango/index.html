@@ -25,6 +25,7 @@
                     <li class="list-group-item">
                         <a href="{% url 'show_category' category.slug %}">
                         {{ category.name }}</a>
+                        &nbsp; <span class="label label-primary">{{ category.likes }}</span>
                     </li>
                 {% endfor %}
             </ul>
@@ -41,6 +42,7 @@
             {% for page in pages %}
                 <li class="list-group-item">
                 <a href="{{ page.url }}">{{ page.title }}</a>
+                &nbsp; <span class="label label-primary">{{ page.views }}</span>
                 </li>
             {% endfor %}
             </ul class="list-group">
