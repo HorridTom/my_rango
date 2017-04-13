@@ -1,8 +1,11 @@
 import json
+import os
+from django.conf import settings
 
 import urllib.parse
 import urllib.request
 import http.client
+from twoodcock_tango_with_django_project.settings import BASE_DIR
 
 
 # Add your Microsoft Account Key to a file called bing.key
@@ -20,7 +23,7 @@ def read_bing_key():
     bing_api_key = None
 
     try:
-        with open('bing.key', 'r') as f:
+        with open(os.path.join(BASE_DIR, 'bing.key'), 'r') as f:
             bing_api_key = f.readline()
     except:
         raise IOError('bing.key file not found')
