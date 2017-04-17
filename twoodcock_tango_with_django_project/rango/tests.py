@@ -34,7 +34,7 @@ class CategoryMethodTests(TestCase):
         i.e. "Random Category String" -> "random-category-string"
         """
 
-        cat = Category('Random Category String')
+        cat = Category(name='Random Category String')
         cat.save()
         self.assertEqual(cat.slug, 'random-category-string')
 
