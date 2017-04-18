@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-from django.conf.global_settings import STATICFILES_DIRS, LOGIN_REDIRECT_URL
+from django.conf.global_settings import STATICFILES_DIRS, LOGIN_REDIRECT_URL,\
+    EMAIL_BACKEND
 from test_app.settings import ACCOUNT_ACTIVATION_DAYS, REGISTRATION_AUTO_LOGIN
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -151,3 +152,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [STATIC_DIR, ]
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'testing@example.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+EMAIL_PORT = 1025

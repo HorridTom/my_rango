@@ -22,6 +22,11 @@
         {% endbuttons %}
     </form>
     <p>
+        <a href="{% url 'password_reset' %}">
+            Forgot your password?
+        </a>
+    </p>
+    <p>
         Not a member?
         <a href="{% url 'registration_register' %}">Register</a>
     </p>
